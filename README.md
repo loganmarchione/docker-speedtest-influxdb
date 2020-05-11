@@ -1,6 +1,6 @@
 # docker-speedtest-influxdb
 
-[![Build Status]()]()
+[![Build Status](https://travis-ci.org/loganmarchione/docker-speedtest-influxdb.svg?branch=master)](https://travis-ci.org/loganmarchione/docker-speedtest-influxdb)
 [![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/loganmarchione/docker-speedtest-influxdb)](https://hub.docker.com/r/loganmarchione/docker-speedtest-influxdb)
 [![MicroBadger Layers](https://img.shields.io/microbadger/layers/loganmarchione/docker-speedtest-influxdb)](https://microbadger.com/images/loganmarchione/docker-speedtest-influxdb)
 
@@ -14,7 +14,7 @@ Runs Ookla's [Speedtest CLI](https://www.speedtest.net/apps/cli) program in Dock
 ## Explanation
 
   - This run's Ooka's Speedtest CLI program on an interval, then writes the data to an InfluxDB database (you can later graph this data with Grafana or Chronograf)
-  - This does **NOT** use the open-source [speedtest-cli](https://github.com/sivel/speedtest-cli). That program uses the Speedtest.net HTTP API, this uses Ookla's official CLI application
+  - This does **NOT** use the open-source [speedtest-cli](https://github.com/sivel/speedtest-cli). That program uses the Speedtest.net HTTP API. This program uses Ookla's official CLI application.
   - ⚠️ Ookla's speedtest application is closed-source (the binary applications are [here](https://bintray.com/ookla)) and Ookla's reasoning is [here](https://www.reddit.com/r/HomeNetworking/comments/dpalqu/speedtestnet_just_launched_an_official_c_cli/f5tm9up/) ⚠️
   - ⚠️ Ookla's speedtest application reports all data back to Ookla ⚠️
 

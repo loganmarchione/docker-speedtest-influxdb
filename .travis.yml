@@ -12,3 +12,18 @@ services:
 script:
   # Build the container
   - docker build --file Dockerfile --tag ${USER}/${REPO}:${VERSION} .
+
+after_success:
+  # Login to DockerHub
+  - echo "$DOCKER_HUB_PASS" | docker login -u "$DOCKER_HUB_USER" --password-stdin
+
+  # Image with numbered tag
+  - docker tag ${USER}/${REPO}:${VERSION} ${USER}/${REPO}:${VERSION}
+  - docker push ${USER}/${REPO}:${VERSION}
+
+  # Image with latest tag
+  - docker tag ${USER}/${REPO}:${VERSION} ${USER}/${REPO}:latest
+  - docker push ${USER}/${REPO}:latest
+
+  # Logout
+  - docker logout
