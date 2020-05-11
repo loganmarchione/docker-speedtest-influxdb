@@ -1,0 +1,14 @@
+---
+
+env:
+  global:
+    - USER=loganmarchione
+    - REPO=docker-speedtest-influxdb
+    - VERSION=$(cat VERSION)
+
+services:
+  - docker
+
+script:
+  # Build the container
+  - docker build --file Dockerfile --tag ${USER}/${REPO}:${VERSION} .
