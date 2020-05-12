@@ -13,15 +13,21 @@ Runs Ookla's [Speedtest CLI](https://www.speedtest.net/apps/cli) program in Dock
 
 ## Explanation
 
-  - This run's Ooka's Speedtest CLI program on an interval, then writes the data to an InfluxDB database (you can later graph this data with Grafana or Chronograf)
+  - This runs Ooka's Speedtest CLI program on an interval, then writes the data to an InfluxDB database (you can later graph this data with Grafana or Chronograf)
   - This does **NOT** use the open-source [speedtest-cli](https://github.com/sivel/speedtest-cli). That program uses the Speedtest.net HTTP API. This program uses Ookla's official CLI application.
-  - ⚠️ Ookla's speedtest application is closed-source (the binary applications are [here](https://bintray.com/ookla)) and Ookla's reasoning is [here](https://www.reddit.com/r/HomeNetworking/comments/dpalqu/speedtestnet_just_launched_an_official_c_cli/f5tm9up/) ⚠️
+  - ⚠️ Ookla's speedtest application is closed-source (the binary applications are [here](https://bintray.com/ookla)) and Ookla's reasoning for this decision is [here](https://www.reddit.com/r/HomeNetworking/comments/dpalqu/speedtestnet_just_launched_an_official_c_cli/f5tm9up/) ⚠️
   - ⚠️ Ookla's speedtest application reports all data back to Ookla ⚠️
 
 ## Requirements
 
-  - You must already have an InfluxDB database created, along with a user that has `WRITE` and `READ` permissions on that database
-  - This Docker container needs to be able to reach that InfluxDB instance by hostname, IP address, or Docker service name (I run this container on the same Docker network as my InfluxDB instance)
+  - You must already have an InfluxDB database created, along with a user that has `WRITE` and `READ` permissions on that database.
+  - This Docker container needs to be able to reach that InfluxDB instance by hostname, IP address, or Docker service name (I run this container on the same Docker network as my InfluxDB instance).
+  - ⚠️ Depending on how often you run this, you may need to monitor your internet connection's usage. If you have a data cap, you could exceed it. The standard speedtest uses about 750MB of data per run. See below for an example. ⚠️
+
+```
+CONTAINER: NET I/O
+speedtest: 225MB / 495MB
+```
 
 ## Docker image information
 
@@ -37,7 +43,7 @@ Runs Ookla's [Speedtest CLI](https://www.speedtest.net/apps/cli) program in Dock
 | INFLUXDB_USER  | Yes       | Database username                | influx_username                             | Needs to have WRITE and READ permissions already                                                 |
 | INFLUXDB_PASS  | Yes       | Database password                | influx_password                             |                                                                                                  |
 | INFLUXDB_DB    | Yes       | Database name                    | SpeedtestStats                              | Must already be created, this does not create a DB                                               |
-| SLEEPY_TIME    | Yes       | Seconds to sleep between runs    | 600                                         | The loop takes about 15-30 seconds to run, so I wouldn't set this value any lower than 60 (1min) |
+| SLEEPY_TIME    | Yes       | Seconds to sleep between runs    | 3600                                        | The loop takes about 15-30 seconds to run, so I wouldn't set this value any lower than 60 (1min) |
 
 ### Ports
 N/A
@@ -75,3 +81,5 @@ networks:
 - [ ] Move the database connection check to a function
 - [ ] Add logic to check if variables are set
 - [ ] Add defaults for HOST and PORT
+- [ ] Update .travis.yml with tests
+- [x] Add warning about bandwidth
