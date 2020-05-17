@@ -65,7 +65,7 @@ services:
       - INFLUXDB_USER=influx_username
       - INFLUXDB_PASS=influx_password
       - INFLUXDB_DB=SpeedtestStats
-      - SLEEPY_TIME=600
+      - SLEEPY_TIME=3600
     networks:
       - influx
     image: loganmarchione/docker-speedtest-influxdb:latest

@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tzdata \
     wget && \
     rm -rf /var/lib/apt/lists/* && \
-    wget --quiet --output-document ookla-speedtest-${VERSION}-${ARCH}-${PLATFORM}.deb https://bintray.com/ookla/debian/download_file?file_path=ookla-speedtest-${VERSION}-${ARCH}-${PLATFORM}.deb && \
+    wget --quiet --output-document ookla-speedtest-${VERSION}-${ARCH}-${PLATFORM}.deb https://ookla.bintray.com/download/ookla-speedtest-${VERSION}-${ARCH}-${PLATFORM}.deb && \
     apt-get install -y ./ookla-speedtest-${VERSION}-${ARCH}-${PLATFORM}.deb && \
     rm ./ookla-speedtest-${VERSION}-${ARCH}-${PLATFORM}.deb
 
