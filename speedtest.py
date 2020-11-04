@@ -8,12 +8,12 @@ import time
 from influxdb import InfluxDBClient
 
 # Variables
-influxdb_host = os.getenv("INFLUXDB_HOST")
-influxdb_port = os.getenv("INFLUXDB_PORT")
+influxdb_host = os.getenv("INFLUXDB_HOST", "localhost")
+influxdb_port = int(os.getenv("INFLUXDB_PORT", 8086))
 influxdb_user = os.getenv("INFLUXDB_USER")
 influxdb_pass = os.getenv("INFLUXDB_PASS")
 influxdb_db = os.getenv("INFLUXDB_DB")
-sleepy_time = int(os.getenv("SLEEPY_TIME"))
+sleepy_time = int(os.getenv("SLEEPY_TIME", 3600))
 start_time = datetime.datetime.utcnow().isoformat()
 
 # Some logging
