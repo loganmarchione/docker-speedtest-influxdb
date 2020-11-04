@@ -1,5 +1,4 @@
 ---
-
 env:
   global:
     - USER=loganmarchione
@@ -9,21 +8,28 @@ env:
 services:
   - docker
 
-script:
-  # Build the container
-  - docker build --file Dockerfile --tag ${USER}/${REPO}:${VERSION} .
+jobs:
+  include:
+    - stage: Build
 
-after_success:
-  # Login to DockerHub
-  - echo "$DOCKER_HUB_PASS" | docker login -u "$DOCKER_HUB_USER" --password-stdin
+      script:
+        # Build the container
+        - docker build --file Dockerfile --tag ${USER}/${REPO}:${VERSION} .
 
-  # Image with numbered tag
-  - docker tag ${USER}/${REPO}:${VERSION} ${USER}/${REPO}:${VERSION}
-  - docker push ${USER}/${REPO}:${VERSION}
+      before_deploy:
+        # Login to DockerHub
+        - echo "$DOCKER_HUB_PASS" | docker login -u "$DOCKER_HUB_USER" --password-stdin
+        # Image with numbered tag
+        - docker tag ${USER}/${REPO}:${VERSION} ${USER}/${REPO}:${VERSION}
+        # Image with latest tag
+        - docker tag ${USER}/${REPO}:${VERSION} ${USER}/${REPO}:latest
 
-  # Image with latest tag
-  - docker tag ${USER}/${REPO}:${VERSION} ${USER}/${REPO}:latest
-  - docker push ${USER}/${REPO}:latest
+      deploy:
+        provider: script
+        script: docker push ${USER}/${REPO}:${VERSION} && docker push ${USER}/${REPO}:latest
+        on:
+          tags: true
 
-  # Logout
-  - docker logout
+      after_deploy:
+        # Logout
+        - docker logout
