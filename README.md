@@ -76,7 +76,7 @@ networks:
 
 ## TODO
 - [ ] Learn Python
-- [ ] Run the processes inside the container as a non-root user
+- [x] Run the processes inside the container as a non-root user
 - [ ] Add a [healthcheck](https://docs.docker.com/engine/reference/builder/#healthcheck)
 - [ ] Move the database connection check to a function
 - [ ] Add logic to check if variables are set
