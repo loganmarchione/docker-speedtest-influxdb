@@ -14,7 +14,6 @@ jobs:
   include:
     - stage: Lint
       python:
-        - 3.6
         - 3.7
       before_install:
         - python --version
