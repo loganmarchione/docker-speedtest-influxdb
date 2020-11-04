@@ -1,4 +1,9 @@
 ---
+language: python
+python:
+  - 3.6
+  - 3.7
+
 env:
   global:
     - USER=loganmarchione
@@ -10,6 +15,14 @@ services:
 
 jobs:
   include:
+    - stage: Lint
+
+      before_install:
+        - python --version
+        - pip install -U pip
+        - pip install -U flake8
+      script: grep -rl '^#!/.*py' | xargs -n1 flake8
+
     - stage: Build
 
       script:
