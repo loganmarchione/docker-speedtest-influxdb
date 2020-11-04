@@ -22,7 +22,8 @@ jobs:
       script: grep -rl '^#!/.*py' | xargs -n1 flake8
 
     - stage: Build
-
+      python:
+        - 3.7
       script:
         # Build the container
         - docker build --file Dockerfile --tag ${USER}/${REPO}:${VERSION} .
