@@ -1,6 +1,6 @@
 # docker-speedtest-influxdb
 
-[![Build Status](https://travis-ci.org/loganmarchione/docker-speedtest-influxdb.svg?branch=master)](https://travis-ci.org/loganmarchione/docker-speedtest-influxdb)
+![CI/CD](https://github.com/loganmarchione/docker-speedtest-influxdb/workflows/CI/CD/badge.svg)
 [![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/loganmarchione/docker-speedtest-influxdb)](https://hub.docker.com/r/loganmarchione/docker-speedtest-influxdb)
 [![MicroBadger Layers](https://img.shields.io/microbadger/layers/loganmarchione/docker-speedtest-influxdb)](https://microbadger.com/images/loganmarchione/docker-speedtest-influxdb)
 
@@ -76,10 +76,10 @@ networks:
 
 ## TODO
 - [ ] Learn Python
-- [x] Run the processes inside the container as a non-root user
+- [x] ~~Run the processes inside the container as a non-root user~~
 - [ ] Add a [healthcheck](https://docs.docker.com/engine/reference/builder/#healthcheck)
 - [ ] Move the database connection check to a function
 - [ ] Add logic to check if variables are set
-- [x] Add defaults for HOST and PORT
-- [ ] Update .travis.yml with tests
-- [x] Add warning about bandwidth
+- [x] ~~Add defaults for HOST and PORT~~
+- [ ] Update CI/CD with tests
+- [x] ~~Add warning about bandwidth~~
