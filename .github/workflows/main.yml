@@ -70,6 +70,9 @@ jobs:
     - name: Test image
       run: |
         docker images
+        docker network create -d bridge temp-network
+        docker run --name influxdb --detach --publish 8086:8086 --env INFLUXDB_DB=SpeedtestStats --env INFLUXDB_WRITE_USER=influx_username --env INFLUXDB_WRITE_USER_PASSWORD=influx_password --volume 'influxdb:/var/lib/influxdb' influxdb:1.8-alpine
+        docker run --name test-container --detach --network=temp-network --env INFLUXDB_HOST=influxdb --env INFLUXDB_PORT=8086 --env INFLUXDB_USER=influx_username --env INFLUXDB_PASS=influx_password --env INFLUXDB_DB=SpeedtestStats --env SLEEPY_TIME=3600 ${USER}/${REPO}:${VERSION}
         docker ps -a
 
   python_cd:
