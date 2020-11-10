@@ -42,13 +42,23 @@ jobs:
         grep -rl '^#!/.*py' | xargs -n1 flake8 --extend-ignore=E501
 
   python_ci:
-    name: Build and test
+    name: Testing
 
     needs: lint
     runs-on: ubuntu-latest
 
+    services:
+      influxdb:
+        image: influxdb:1.8-alpine
+        ports:
+        - 8086/tcp
+        env:
+          INFLUXDB_DB=SpeedtestStats
+          INFLUXDB_WRITE_USER=influx_username
+          INFLUXDB_WRITE_USER_PASSWORD=influx_password
+
     steps:
-    - name: Check out the codebase
+    - name: Test connectivity to database
       uses: actions/checkout@v2
 
     - name: Set variables
@@ -66,17 +76,6 @@ jobs:
         tags: |
           ${{ env.USER }}/${{ env.REPO }}:${{ env.VERSION }}
           ${{ env.USER }}/${{ env.REPO }}:latest
-
-    - name: Service container
-      services:
-        influxdb:
-          image: influxdb:1.8-alpine
-          ports:
-            - 8086:8086
-          env:
-            INFLUXDB_DB=SpeedtestStats
-            INFLUXDB_WRITE_USER=influx_username
-            INFLUXDB_WRITE_USER_PASSWORD=influx_password
 
     - name: Test image
       run: |
