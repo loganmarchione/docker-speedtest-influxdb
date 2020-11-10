@@ -76,12 +76,16 @@ def loop():
         print("STATE: Connected to InfluxDB successfully - version is", result)
         print("STATE: Writing to database")
         client.write_points(json_body)
-    except influxdb.exceptions.InfluxDBClientError:
+    except influxdb.exceptions.InfluxDBClientError as err:
         print("ERROR: Error with client")
+        print(err)
         sys.exit(1)
-    except influxdb.exceptions.InfluxDBServerError:
+    except influxdb.exceptions.InfluxDBServerError as err:
         print("ERROR: Error with server")
+        print(err)
         sys.exit(1)
+    except Exception as err:
+        print(err)
 
     print("STATE: Sleeping for", sleepy_time, "seconds")
     time.sleep(sleepy_time)

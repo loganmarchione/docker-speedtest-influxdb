@@ -20,6 +20,7 @@ Runs Ookla's [Speedtest CLI](https://www.speedtest.net/apps/cli) program in Dock
 
 ## Requirements
 
+  - This only works with InfluxDB 1.8 and lower, because I'm using [this](https://github.com/influxdata/influxdb-python) client library.
   - You must already have an InfluxDB database created, along with a user that has `WRITE` and `READ` permissions on that database.
   - This Docker container needs to be able to reach that InfluxDB instance by hostname, IP address, or Docker service name (I run this container on the same Docker network as my InfluxDB instance).
   - ⚠️ Depending on how often you run this, you may need to monitor your internet connection's usage. If you have a data cap, you could exceed it. The standard speedtest uses about 750MB of data per run. See below for an example. ⚠️
