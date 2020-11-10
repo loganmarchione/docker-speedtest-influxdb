@@ -42,7 +42,7 @@ jobs:
         grep -rl '^#!/.*py' | xargs -n1 flake8 --extend-ignore=E501
 
   python_ci:
-    name: Testing
+    name: Build and test
 
     needs: lint
     runs-on: ubuntu-latest
@@ -58,7 +58,7 @@ jobs:
           INFLUXDB_WRITE_USER_PASSWORD: ${{ env.TEST_PASS }}
 
     steps:
-    - name: Test connectivity to database
+    - name: Check out the codebase
       uses: actions/checkout@v2
 
     - name: Set variables
@@ -77,10 +77,10 @@ jobs:
           ${{ env.USER }}/${{ env.REPO }}:${{ env.VERSION }}
           ${{ env.USER }}/${{ env.REPO }}:latest
 
-    - name: Test image
+    - name: Test image and connectivity to service container
       run: |
         docker images
-        docker run --name test-container --detach --network=temp-network --env INFLUXDB_HOST=influxdb --env INFLUXDB_PORT=8086 --env INFLUXDB_USER=influx_username --env INFLUXDB_PASS=${{ env.TEST_PASS }} --env INFLUXDB_DB=SpeedtestStats --env SLEEPY_TIME=3600 ${USER}/${REPO}:${VERSION}
+        docker run --name test-container --detach --env INFLUXDB_HOST=influxdb --env INFLUXDB_PORT=8086 --env INFLUXDB_USER=influx_username --env INFLUXDB_PASS=${{ env.TEST_PASS }} --env INFLUXDB_DB=SpeedtestStats --env SLEEPY_TIME=3600 ${USER}/${REPO}:${VERSION}
         sleep 60
         docker ps -a
 
