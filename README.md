@@ -1,3 +1,11 @@
+# ⚠️ WARNING ⚠️
+
+This code is no longer maintained.
+
+This container is only compatible with InfluxDB up to v1.7.x. If you want to use InfluxDB v1.8 or higher, use the v2 container (link below). The only updates this container will receive are the weekly scheduled rebuilds for OS updates. The application code **will not** be updated.
+
+https://hub.docker.com/r/loganmarchione/docker-speedtest-influxdbv2
+
 # docker-speedtest-influxdb
 
 ![CI/CD](https://github.com/loganmarchione/docker-speedtest-influxdb/workflows/CI/CD/badge.svg)
