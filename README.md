@@ -1,8 +1,6 @@
 # ⚠️ WARNING ⚠️
 
-This code is no longer maintained.
-
-This container is only compatible with InfluxDB up to v1.7.x. If you want to use InfluxDB v1.8 or higher, use the v2 container (link below). The only updates this container will receive are the weekly scheduled rebuilds for OS updates. The application code **will not** be updated.
+This container is only compatible with InfluxDB up to v1.7.x. If you want to use InfluxDB v1.8 or higher, use the v2 container (link below).
 
 https://hub.docker.com/r/loganmarchione/docker-speedtest-influxdbv2
 
@@ -10,7 +8,6 @@ https://hub.docker.com/r/loganmarchione/docker-speedtest-influxdbv2
 
 ![CI/CD](https://github.com/loganmarchione/docker-speedtest-influxdb/workflows/CI/CD/badge.svg)
 [![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/loganmarchione/docker-speedtest-influxdb)](https://hub.docker.com/r/loganmarchione/docker-speedtest-influxdb)
-[![MicroBadger Layers](https://img.shields.io/microbadger/layers/loganmarchione/docker-speedtest-influxdb)](https://microbadger.com/images/loganmarchione/docker-speedtest-influxdb)
 
 Runs Ookla's [Speedtest CLI](https://www.speedtest.net/apps/cli) program in Docker, sends the results to InfluxDB
   - Source code: [GitHub](https://github.com/loganmarchione/docker-speedtest-influxdb)
@@ -23,12 +20,13 @@ Runs Ookla's [Speedtest CLI](https://www.speedtest.net/apps/cli) program in Dock
 
   - This runs Ooka's Speedtest CLI program on an interval, then writes the data to an InfluxDB database (you can later graph this data with Grafana or Chronograf)
   - This does **NOT** use the open-source [speedtest-cli](https://github.com/sivel/speedtest-cli). That program uses the Speedtest.net HTTP API. This program uses Ookla's official CLI application.
-  - ⚠️ Ookla's speedtest application is closed-source (the binary applications are [here](https://bintray.com/ookla)) and Ookla's reasoning for this decision is [here](https://www.reddit.com/r/HomeNetworking/comments/dpalqu/speedtestnet_just_launched_an_official_c_cli/f5tm9up/) ⚠️
+  - ⚠️ Ookla's speedtest application is closed-source (the binary applications are [here](https://www.speedtest.net/apps/cli)) and Ookla's reasoning for this decision is [here](https://www.reddit.com/r/HomeNetworking/comments/dpalqu/speedtestnet_just_launched_an_official_c_cli/f5tm9up/) ⚠️
   - ⚠️ Ookla's speedtest application reports all data back to Ookla ⚠️
+  - ⚠️ This application uses Ookla's recommendation to install by piping curl to bash  ⚠️
 
 ## Requirements
 
-  - This only works with InfluxDB 1.8 and lower, because I'm using [this](https://github.com/influxdata/influxdb-python) client library.
+  - This only works with InfluxDB 1.7 and lower, because I'm using [this](https://github.com/influxdata/influxdb-python) client library.
   - You must already have an InfluxDB database created, along with a user that has `WRITE` and `READ` permissions on that database.
   - This Docker container needs to be able to reach that InfluxDB instance by hostname, IP address, or Docker service name (I run this container on the same Docker network as my InfluxDB instance).
   - ⚠️ Depending on how often you run this, you may need to monitor your internet connection's usage. If you have a data cap, you could exceed it. The standard speedtest uses about 750MB of data per run. See below for an example. ⚠️
