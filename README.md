@@ -1,6 +1,6 @@
 # ⚠️ WARNING ⚠️
 
-This container is only compatible with InfluxDB up to v1.7.x. If you want to use InfluxDB v1.8 or higher, use the v2 container (link below).
+This container is only compatible with InfluxDB up to v1.7. If you want to use InfluxDB v1.8 or higher, use the v2 container (link below).
 
 https://hub.docker.com/r/loganmarchione/docker-speedtest-influxdbv2
 
