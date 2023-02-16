@@ -2,8 +2,6 @@
 
 The [Python client library](https://github.com/influxdata/influxdb-python) that this project relies on has been retired. You should migrate to the [v2 version](https://hub.docker.com/r/loganmarchione/docker-speedtest-influxdbv2) of this container image.
 
-# ⚠️ WARNING ⚠️
-
 This container is only compatible with InfluxDB up to v1.7. If you want to use InfluxDB v1.8 or higher, use the v2 container (link below).
 
 https://hub.docker.com/r/loganmarchione/docker-speedtest-influxdbv2
