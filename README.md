@@ -1,5 +1,9 @@
 # ⚠️ WARNING ⚠️
 
+The [Python client library](https://github.com/influxdata/influxdb-python) that this project relies on has been retired. You should migrate to the [v2 version](https://hub.docker.com/r/loganmarchione/docker-speedtest-influxdbv2) of this container image.
+
+# ⚠️ WARNING ⚠️
+
 This container is only compatible with InfluxDB up to v1.7. If you want to use InfluxDB v1.8 or higher, use the v2 container (link below).
 
 https://hub.docker.com/r/loganmarchione/docker-speedtest-influxdbv2
@@ -10,12 +14,8 @@ https://github.com/influxdata/telegraf/tree/master/plugins/inputs/internet_speed
 
 # docker-speedtest-influxdb
 
-[![CI/CD](https://github.com/loganmarchione/docker-speedtest-influxdb/actions/workflows/main.yml/badge.svg)](https://github.com/loganmarchione/docker-speedtest-influxdb/actions/workflows/main.yml)
-[![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/loganmarchione/docker-speedtest-influxdb)](https://hub.docker.com/r/loganmarchione/docker-speedtest-influxdb)
-
 Runs Ookla's [Speedtest CLI](https://www.speedtest.net/apps/cli) program in Docker, sends the results to InfluxDB
   - Source code: [GitHub](https://github.com/loganmarchione/docker-speedtest-influxdb)
-  - Docker container: [Docker Hub](https://hub.docker.com/r/loganmarchione/docker-speedtest-influxdb)
   - Image base: [Python (slim Buster)](https://hub.docker.com/_/python)
   - Init system: N/A
   - Application: [Speedtest CLI](https://www.speedtest.net/apps/cli)
@@ -43,10 +43,6 @@ speedtest: 225MB / 495MB
 
 ## Docker image information
 
-### Docker image tags
-  - `latest`: Latest version
-  - `X.X.X`: [Semantic version](https://semver.org/) (use if you want to stick on a specific version)
-
 ### Environment variables
 | Variable       | Required?                | Definition                       | Example                                     | Comments                                                                                         |
 |----------------|--------------------------|----------------------------------|---------------------------------------------|--------------------------------------------------------------------------------------------------|
@@ -64,26 +60,26 @@ N/A
 N/A
 
 ### Example usage
-Below is an example docker-compose.yml file.
-```
-version: '3'
-services:
-  speedtest:
-    container_name: tig_speedtest
-    restart: unless-stopped
-    environment:
-      - INFLUXDB_HOST=influxdb
-      - INFLUXDB_PORT=8086
-      - INFLUXDB_USER=influx_username
-      - INFLUXDB_PASS=influx_password
-      - INFLUXDB_DB=SpeedtestStats
-      - SLEEPY_TIME=3600
-    networks:
-      - influx
-    image: loganmarchione/docker-speedtest-influxdb:latest
 
-networks:
-  influx:
+#### Build
+
+```
+git clone https://github.com/loganmarchione/docker-speedtest-influxdb.git
+cd docker-speedtest-influxdb
+sudo docker build --no-cache --file Dockerfile --tag loganmarchione/docker-speedtest-influxdb  .
+```
+
+#### Run
+
+```
+sudo docker run --name docker-speedtest-influxdb \
+  --env INFLUXDB_HOST=influxdb \
+  --env INFLUXDB_PORT=8086 \
+  --env INFLUXDB_USER=influx_username \
+  --env INFLUXDB_PASS=influx_password \
+  --env INFLUXDB_DB=SpeedtestStats \
+  --env SLEEPY_TIME=3600 \
+  loganmarchione/docker-speedtest-influxdb
 ```
 
 ## TODO
