@@ -1,12 +1,8 @@
 # ⚠️ WARNING ⚠️
 
-The [Python client library](https://github.com/influxdata/influxdb-python) that this project relies on has been retired. You should migrate to the [v2 version](https://hub.docker.com/r/loganmarchione/docker-speedtest-influxdbv2) of this container image.
+The [Python client library](https://github.com/influxdata/influxdb-python) that this project relies on has been retired. You should migrate to the [v2 version](https://github.com/loganmarchione/docker-speedtest-influxdbv2) of this container image.
 
-This container is only compatible with InfluxDB up to v1.7. If you want to use InfluxDB v1.8 or higher, use the v2 container (link below).
-
-https://hub.docker.com/r/loganmarchione/docker-speedtest-influxdbv2
-
-Telegraf now has an official Internet Speed Monitor plugin. It doesn't record as much data as this container, but it is officially supported, if that matters to you.
+Telegraf now has an official Internet Speed Monitor plugin. I recommend using that instead.
 
 https://github.com/influxdata/telegraf/tree/master/plugins/inputs/internet_speed
 
